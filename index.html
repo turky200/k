@@ -1,0 +1,388 @@
+<!-- saved from url=(0028)http://www.raed70.ct.ws/?i=2 -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - خدمات تطوير المواقع</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: #000000;
+            color: #fff;
+        }
+
+        /* تنبيهات النظام */
+        .system-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1001;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            padding: 1.5rem 2rem;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #bbaeae, #fe0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        /* قسم الخدمات */
+        .services {
+            padding: 8rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #f9fafc;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #f0f3f6;
+            margin: 1rem 0;
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #390404, #fc0e0e);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 13, 166, 0.3);
+        }
+
+        /* سلة التسوق */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            z-index: 1001;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .cart-item-actions button {
+            background: rgba(255,0,0,0.1);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            text-align: left;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .cart-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: #f0250f;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(59,130,246,0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- تنبيه الدفع -->
+    <div class="overlay" id="overlay" style="display: none;"></div>
+    <div class="system-alert" id="paymentAlert" style="display: none;">
+        <h3>⚠️ نظام الدفع غير متاح حالياً</h3>
+        <p>جاري تطوير نظام الدفع، سيصبح متاحاً قريباً</p>
+        <button onclick="closeAlert()" class="buy-btn" style="margin-top: 1.5rem;">حسناً</button>
+    </div>
+
+    <!-- سلة التسوق -->
+    <div class="cart-modal" id="cartModal" style="display: none;">
+        <h3>🛒 سلة التسوق</h3>
+        <div class="cart-items" id="cartItems"><div class="cart-item">
+                    <div class="cart-item-info">
+                        <div>تطوير مواقع الويب</div>
+                        <div>1500$</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="removeItem(0)">حذف</button>
+                    </div>
+                </div></div>
+        <div class="cart-total">المجموع: <span id="cartTotal">1500</span>$</div>
+        <button class="buy-btn" onclick="checkout()" style="margin-top: 1rem;">إتمام الدفع</button>
+        <button class="buy-btn" onclick="closeCart()" style="background: #64748b; margin-top: 0.5rem;">إغلاق</button>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">mohammed app</div>
+        </div>
+    </nav>
+
+    <!-- زر السلة -->
+    <div class="cart-btn" onclick="openCart()">
+        🛒 سلة التسوق
+        <span class="cart-counter" id="cartCounter">1</span>
+    </div>
+
+    <!-- الخدمات -->
+    <section class="services">
+        <h1 style="text-align: center; margin-bottom: 2rem;">خدماتنا المميزة</h1>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>تطوير مواقع الويب</h3>
+                <p>تصميم وتطوير مواقع احترافية بتقنيات حديثة</p>
+                <div class="price">1500$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;تطوير مواقع الويب&#39;, 1500)">إضافة إلى السلة</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>تطبيقات الجوال</h3>
+                <p>تطوير تطبيقات هجينة تعمل على جميع المنصات</p>
+                <div class="price">2500$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;تطبيقات الجوال&#39;, 2500)">إضافة إلى السلة</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3>متاجر إلكترونية</h3>
+                <p>إنشاء متاجر متكاملة مع أنظمة دفع متقدمة</p>
+                <div class="price">3500$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;متاجر إلكترونية&#39;, 3500)">إضافة إلى السلة</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>تصميم UI/UX</h3>
+                <p>تصميم واجهات مستخدم تجريبية مميزة</p>
+                <div class="price">1000$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;تصميم UI/UX&#39;, 1000)">إضافة إلى السلة</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>حماية المواقع</h3>
+                <p>أنظمة حماية متقدمة ضد الاختراقات</p>
+                <div class="price">2000$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;حماية المواقع&#39;, 2000)">إضافة إلى السلة</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>تحسين SEO</h3>
+                <p>تحسين ترتيب موقعك في محركات البحث</p>
+                <div class="price">800$</div>
+                <button class="buy-btn" onclick="addToCart(&#39;تحسين SEO&#39;, 800)">إضافة إلى السلة</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            showAlert('تمت الإضافة إلى السلة');
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            showAlert('تم الحذف من السلة');
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCounter').textContent = cart.length;
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <div>${item.name}</div>
+                        <div>${item.price}$</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="removeItem(${index})">حذف</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+            document.getElementById('cartTotal').textContent = total;
+        }
+
+        function openCart() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function checkout() {
+            closeCart();
+            document.getElementById('paymentAlert').style.display = 'block';
+        }
+
+        function closeAlert() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('paymentAlert').style.display = 'none';
+        }
+
+        function showAlert(message) {
+            const alertBox = document.createElement('div');
+            alertBox.style.position = 'fixed';
+            alertBox.style.bottom = '20px';
+            alertBox.style.left = '50%';
+            alertBox.style.transform = 'translateX(-50%)';
+            alertBox.style.background = '#3b82f6';
+            alertBox.style.color = '#fff';
+            alertBox.style.padding = '1rem 2rem';
+            alertBox.style.borderRadius = '8px';
+            alertBox.style.zIndex = '10000';
+            alertBox.textContent = message;
+            document.body.appendChild(alertBox);
+            
+            setTimeout(() => {
+                alertBox.remove();
+            }, 2000);
+        }
+
+        document.getElementById('overlay').addEventListener('click', () => {
+            closeCart();
+            closeAlert();
+        });
+    </script>
+
+<div style="all: unset;"><div style="all: unset;"><template shadowrootmode="closed"><link rel="stylesheet" href="chrome-extension://gbefmodhlophhakmoecijeppjblibmie/contentscript.css"></template></div></div></body></html>
+
